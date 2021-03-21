@@ -19,7 +19,7 @@ using namespace ariel;
 #include <algorithm>
 using namespace std;
 
-TEST_CASE("Good post") {
+TEST_CASE("post and read") {
     ariel::Board board;
 	board.post(24,0,Direction::Horizontal,"looking for a new job?");
     CHECK(board.read(24,5,Direction::Horizontal,12)=="ng for a new");
@@ -48,6 +48,8 @@ TEST_CASE("Good post") {
     board.post(11,32,Direction::Horizontal,"WandaVision,Disney+");
     CHECK(board.read(11,23,Direction::Horizontal,16)=="th city WandaVis");
     board.post(0,41,Direction::Vertical,"♥ coding?");
+    board.post(0,41,Direction::Vertical,"");
+    CHECK(board.read(0,41,Direction::Vertical,1)=="♥");
     CHECK(board.read(2,41,Direction::Vertical,10)=="coding? io");
     board.post(11,32,Direction::Horizontal,"enjoy your work? I don't think so");
     board.post(2,0,Direction::Horizontal,"will you marry me?");
@@ -63,30 +65,6 @@ TEST_CASE("Good post") {
     
 }
 
-TEST_CASE("Bad inputs") {
-    ariel::Board board;
-    CHECK_THROWS(board.post(-1,2,Direction::Horizontal, "first negative Hor"));
-    CHECK_THROWS(board.post(5,-9,Direction::Horizontal, "second negative Hor"));
-    CHECK_THROWS(board.post(-6,-8,Direction::Horizontal, "two negative Hor"));
-    CHECK_THROWS(board.post(-32,7,Direction::Vertical, "first negative Ver"));
-    CHECK_THROWS(board.post(34,-19,Direction::Vertical, "first negative Ver"));
-    CHECK_THROWS(board.post(-6,-8,Direction::Vertical, "two negative Ver"));
-    CHECK_THROWS(board.read(2,0,Direction::Vertical,-8));   //negative length
-    CHECK_THROWS(board.read(-3,5,Direction::Vertical,10));  //read first negative Ver
-    CHECK_THROWS(board.read(12,-25,Direction::Vertical,30));  //read second negative Ver
-    CHECK_THROWS(board.read(14,13,Direction::Vertical,22));  //read two negative Ver
-    CHECK_THROWS(board.read(-25,-41,Direction::Horizontal,23)); //read two negative Hor
-    CHECK_THROWS(board.read(-33,1,Direction::Horizontal,18)); //read first negative Hor 
-    CHECK_THROWS(board.read(27,-44,Direction::Horizontal,2)); //read second negative Hor 
-    CHECK_THROWS(board.read(-9,15,Direction::Vertical,-7));  //read first length negative Ver
-    CHECK_THROWS(board.read(10,-16,Direction::Vertical,-4));  //read second length negative Ver
-    CHECK_THROWS(board.read(18,3,Direction::Vertical,-22));  //read two length negative Ver 
-    CHECK_THROWS(board.read(-5,-39,Direction::Horizontal,14)); //read two length negative Hor
-    CHECK_THROWS(board.read(-50,3,Direction::Horizontal,-5)); //read first length negative Hor 
-    CHECK_THROWS(board.read(9,-17,Direction::Horizontal,-9)); //read second length negative Hor 
-
-    
-}
 
 
 /* Add more test cases here */

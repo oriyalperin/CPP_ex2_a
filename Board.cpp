@@ -5,20 +5,17 @@
 using namespace std;
 using namespace ariel;
 
-void Board::post(unsigned int row, unsigned int column, Direction , string message )
+void Board::post(unsigned int row, unsigned int column, Direction d, string message )
 {
-    if(row<0 || column<0)
-    {
-        throw out_of_range("row and column must be positive");
-    }
+    cout << "posting on board" << endl;  
 }
 
-string Board::read(unsigned int row, unsigned int column, Direction , unsigned int length)
+string Board::read(unsigned int row, unsigned int column, Direction d, unsigned int length)
 {
-    return "hello\n";
+    return "reading\n";
 }
 
 void Board::show()
 {
-    printf("all posts\n");
+    cout << "current board" << endl;  
 }
